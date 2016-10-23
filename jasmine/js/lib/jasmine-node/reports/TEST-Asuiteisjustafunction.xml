@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+<testsuite name="A suite is just a function" errors="0" tests="1" failures="0" time="0" timestamp="2016-07-28T02:50:52">
+  <testcase classname="A suite is just a function" name="and so is a spec" time="0"></testcase>
+</testsuite>
+</testsuites>
