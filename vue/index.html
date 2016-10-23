@@ -6,8 +6,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <script type="text/javascript" src="https://vuejs.org/js/vue.js"></script>
-    <!-- ngRoute 모듈을 사용하기 위해 추가한다.
-    <script type="text/javascript" src="/angular/myApp.js"></script>-->
 </head>
 <body>
 
@@ -18,14 +16,16 @@
 
     <div id="app-list">
         <ol>
-            <todo-item v-for="todo in todos" v-bind:todo="todo"></todo-item>
+            <todo-item></todo-item>
         </ol>
     </div>
 
     <div id="app-input">
-        <input v-model="value" placeholder="input my to do item">
+        <input v-model="item" placeholder="input my to do item">
         <button v-on:click="add()">ADD</button>
     </div>
+
+
 
 
     <!--<p>Message is: {{ message }}</p>
@@ -50,11 +50,10 @@
             // "prop", which is like a custom attribute.
             // This prop is called todo.
             props: ['todo'],
-            template: '<li><button data-value="{{ todo.value }}" v-on:click="remove()">REMOVE</button>  {{ todo.text }}</li>',
+            template: '<li v-for="(value, key) in todos" v-bind:value="todos.value" v-bind:key="todos.key"><button v-on:click="remove(key)"> X </button>  {{ todo.value }}</li>',
             methods: {
                 remove: function (e) {
                     debugger;
-                    //appList.todos.splice("text", this.value);
                 }
             }
         })
@@ -63,28 +62,24 @@
             el: '#app-list',
             data: {
                 todos: [
-                    { value : 0, text: 'Learn JavaScript' },
-                    { value : 1, text: 'Learn Vue' },
-                    { value : 2, text: 'Build something awesome' }
+                    { key : 0, value: 'Learn JavaScript' },
+                    { key : 1, value: 'Learn Vue' },
+                    { key : 2, value: 'Build something awesome' }
                 ]
             },
             methods: {
-                remove: function (e) {
-                    debugger;
-                    //appList.todos.splice("text", this.value);
-                }
             }
         })
 
         var appInput = new Vue({
             el: '#app-input',
             data: {
-                value : ""
+                item : ""
             },
             methods: {
                 add: function () {
-                    appList.todos.push({"value" : appList.todos.length, "text" : this.value});
-                    this.value = "";
+                    appList.todos.push({"key" : appList.todos.length, "value" : this.item});
+                    this.item = "";
                 },
                 remove: function () {
                     //appList.todos.splice("text", this.value);
