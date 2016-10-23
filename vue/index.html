@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html ng-app="myApp">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>angular-route</title>
+    <title>vue-todo</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <script type="text/javascript" src="https://vuejs.org/js/vue.js"></script>
@@ -14,20 +14,84 @@
 
 <div class="container">
 
-    <h1>checkbox</h1>
+    <h1>my to do list</h1>
 
-    <div id="app">
-        {{ message }}
+    <div id="app-list">
+        <ol>
+            <todo-item v-for="todo in todos" v-bind:todo="todo"></todo-item>
+        </ol>
     </div>
+
+    <div id="app-input">
+        <input v-model="value" placeholder="input my to do item">
+        <button v-on:click="add()">ADD</button>
+    </div>
+
+
+    <!--<p>Message is: {{ message }}</p>
+    <div id="example">
+        <my-component></my-component>
+    </div>-->
+
 
     <script type="text/javascript">
 
-        var app = new Vue({
-            el: '#app',
-            data: {
-                message: 'Hello Vue!'
+//        // register
+//        Vue.component('my-component', {
+//            template: '<div>A custom component!</div>'
+//        })
+//        // create a root instance
+//        new Vue({
+//            el: '#example'
+//        })
+
+        Vue.component('todo-item', {
+            // The todo-item component now accepts a
+            // "prop", which is like a custom attribute.
+            // This prop is called todo.
+            props: ['todo'],
+            template: '<li><button data-value="{{ todo.value }}" v-on:click="remove()">REMOVE</button>  {{ todo.text }}</li>',
+            methods: {
+                remove: function (e) {
+                    debugger;
+                    //appList.todos.splice("text", this.value);
+                }
             }
-        });
+        })
+
+        var appList = new Vue({
+            el: '#app-list',
+            data: {
+                todos: [
+                    { value : 0, text: 'Learn JavaScript' },
+                    { value : 1, text: 'Learn Vue' },
+                    { value : 2, text: 'Build something awesome' }
+                ]
+            },
+            methods: {
+                remove: function (e) {
+                    debugger;
+                    //appList.todos.splice("text", this.value);
+                }
+            }
+        })
+
+        var appInput = new Vue({
+            el: '#app-input',
+            data: {
+                value : ""
+            },
+            methods: {
+                add: function () {
+                    appList.todos.push({"value" : appList.todos.length, "text" : this.value});
+                    this.value = "";
+                },
+                remove: function () {
+                    //appList.todos.splice("text", this.value);
+                }
+            }
+        })
+
 
     </script>
 
