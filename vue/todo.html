@@ -14,12 +14,24 @@
 
     <h1>my to do list</h1>
 
+    <!-- todo template
     <div id="app-list">
         <ol>
-            <todo-item></todo-item>
+            <li v-for="todo in todos">
+                <button v-on:click="remove(todo.key)"> X </button> {{ todo.value }}
+            </li>
+        </ol>
+    </div> -->
+
+    <!-- todo component -->
+    <div id="app-list">
+        <ol>
+            <todo-item v-for="todo in todos" v-bind:todo="todo"></todo-item>
         </ol>
     </div>
 
+
+    <!-- input -->
     <div id="app-input">
         <input v-model="item" placeholder="input my to do item">
         <button v-on:click="add()">ADD</button>
@@ -27,49 +39,46 @@
 
 
 
-
-    <!--<p>Message is: {{ message }}</p>
-    <div id="example">
-        <my-component></my-component>
-    </div>-->
-
-
     <script type="text/javascript">
 
-//        // register
-//        Vue.component('my-component', {
-//            template: '<div>A custom component!</div>'
-//        })
-//        // create a root instance
-//        new Vue({
-//            el: '#example'
-//        })
+        var removeItem = function(key){
+            appList.todos = appList.todos.filter(function(val){
+                if(val.key !== key) return val;
+            });
+        };
 
         Vue.component('todo-item', {
             // The todo-item component now accepts a
             // "prop", which is like a custom attribute.
             // This prop is called todo.
             props: ['todo'],
-            template: '<li v-for="(value, key) in todos" v-bind:value="todos.value" v-bind:key="todos.key"><button v-on:click="remove(key)"> X </button>  {{ todo.value }}</li>',
+            template: '<li><button v-on:click="remove(todo.key)"> X </button> {{ todo.value }}</li>',
             methods: {
-                remove: function (e) {
-                    debugger;
+                remove: function (key) {
+                    removeItem(key);
                 }
             }
-        })
+        });
+
 
         var appList = new Vue({
             el: '#app-list',
             data: {
                 todos: [
-                    { key : 0, value: 'Learn JavaScript' },
-                    { key : 1, value: 'Learn Vue' },
-                    { key : 2, value: 'Build something awesome' }
+//                    { value: 'Learn JavaScript' },
+//                    { value: 'Learn Vue' },
+//                    { value: 'Build something awesome' }
+                    { key : "key_0", value: 'Learn JavaScript' },
+                    { key : "key_1", value: 'Learn Vue' },
+                    { key : "key_2", value: 'Build something awesome' }
                 ]
             },
             methods: {
+                remove: function (key) {
+                    removeItem(key);
+                }
             }
-        })
+        });
 
         var appInput = new Vue({
             el: '#app-input',
@@ -78,14 +87,14 @@
             },
             methods: {
                 add: function () {
-                    appList.todos.push({"key" : appList.todos.length, "value" : this.item});
+                    appList.todos.push({"key" : "key_"+appList.todos.length, "value" : this.item});
                     this.item = "";
                 },
-                remove: function () {
-                    //appList.todos.splice("text", this.value);
+                remove: function (key) {
+                    removeItem(key);
                 }
             }
-        })
+        });
 
 
     </script>
