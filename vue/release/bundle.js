@@ -44,9 +44,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	document.write("It works.");
-
-
+	
 	__webpack_require__(1);
 
 
@@ -54,8 +52,8 @@
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../css/style.css\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-	var Vue = __webpack_require__(3);
+	//require("../css/style.css");
+	var Vue = __webpack_require__(2);
 
 	var removeItem = function(key){
 	  appList.todos = appList.todos.filter(function(val){
@@ -113,8 +111,7 @@
 	});
 
 /***/ },
-/* 2 */,
-/* 3 */
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -128,6 +125,7 @@
 	  (global.Vue = factory());
 	}(this, (function () { 'use strict';
 
+	  
 	/*  */
 
 	/**

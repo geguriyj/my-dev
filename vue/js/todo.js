@@ -1,4 +1,4 @@
-require("../css/style.css");
+//require("../css/style.css");
 var Vue = require("./vue.js");
 
 var removeItem = function(key){
