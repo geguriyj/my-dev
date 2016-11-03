@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+</head>
+<body>
+
+<div class="container">
+
+</div>
+
+<script type="text/javascript" src="./require.js"></script>
+
+<script type="text/javascript">
+
+    require.config({
+        baseUrl : "js",
+        paths : {
+            app1 : "app1",
+            app2 : "../app2"
+        }
+    });
+
+//    require(["app1","../app2"]);
+    require(["app1","app2"]);
+
+
+</script>
+
+
+</body>
+</html>
