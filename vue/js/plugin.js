@@ -28,11 +28,11 @@ require(['vue'], function(vue){
         data: {
             val : 0
         },
-           methods : {
-               install : function(Vue, options){
-                   debugger;
-               }
+        methods : {
+           install : function(Vue, options){
+
            }
+       }
     });
 
     plugin1.install = function(Vue, options){
@@ -73,7 +73,7 @@ require(['vue'], function(vue){
         },
         methods : {
             install : function(Vue, options){
-                debugger;
+
             }
         }
     });
