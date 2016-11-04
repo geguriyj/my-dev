@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>vue-todo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+</head>
+<body>
+
+
+<div class="container">
+
+    <h1>TEST</h1>
+
+</div>
+
+
+<script type="text/javascript" src="js/require.js"></script>
+
+<script type="text/javascript">
+
+    require.config({
+        baseUrl : "js",
+        paths : {
+            "vue" : "vue",
+            "vue-router" : "vue-router",
+            "vue-element" : "vue-element",
+            "vue-touch" : "vue-touch"
+        }
+    });
+
+
+//    var Vue = require(['vue'])
+//    var VueRouter = require(['vue-router'])
+
+    require(['vue','vue-router','vue-element','vue-touch'], function(Vue, VueRouter, VueElement, VueTouch){
+        Vue.use(VueRouter)
+        Vue.use(VueElement)
+        Vue.use(VueTouch)
+    })
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>
