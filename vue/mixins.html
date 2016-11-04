@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+</head>
+<body>
+
+
+<div class="container">
+
+    <h1>Mixin TEST</h1>
+
+</div>
+
+
+<script type="text/javascript" src="js/vue.js"></script>
+
+<script type="text/javascript">
+
+    // define a mixin object
+    var myMixin = {
+        created: function () {
+            this.hello()
+        },
+        methods: {
+            hello: function () {
+                console.log('hello from mixin!')
+            }
+        }
+    }
+    // define a component that uses this mixin
+    var Component = Vue.extend({
+        mixins: [myMixin]
+    })
+    var component = new Component() // -> "hello from mixin!"
+
+
+
+
+    var mixin = {
+        created: function () {
+            console.log('mixin hook called')
+        }
+    }
+
+    var Component = new Vue({
+        mixins: [mixin],
+        created: function () {
+            console.log('component hook called')
+        }
+    })
+
+
+</script>
+
+
+
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>vue-todo</title>
+    <title></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 </head>
@@ -11,7 +11,7 @@
 
 <div class="container">
 
-    <h1>TEST</h1>
+    <h1>plugin TEST</h1>
 
     <div id="plugin1">plugin1</div>
     <div id="plugin2">plugin2</div>
@@ -33,7 +33,82 @@
         }
     });
 
-    require(["plugin"]);
+    var Vue;
+    require(['vue'], function(vue){
+        Vue = vue;
+
+        var plugin1 = new Vue({
+            el: '#plugin1',
+            data: {
+                val : 0
+            },
+            methods : {
+                install : function(Vue, options){
+
+                }
+            }
+        });
+
+        plugin1.install = function(Vue, options){
+
+            // 1. add global method or property
+            Vue.myGlobalMethod = function () {
+                // something logic ...
+                console.log("plugin1 myGlobalMethod");
+            }
+            // 2. add a global asset
+            Vue.directive('my-directive', {
+                bind (el, binding, vnode, oldVnode) {
+                    // something logic ...
+                    console.log("my-directive");
+                }
+            })
+            // 3. inject some component options
+            Vue.mixin({
+                created: function () {
+                    // something logic ...
+                    console.log("mixin");
+                }
+            })
+            // 4. add an instance method
+            Vue.prototype.$myMethod = function (options) {
+                // something logic ...
+                console.log("plugin1 $myMethod");
+            }
+        };
+
+        Vue.use(plugin1);
+
+
+        var plugin2 = new Vue({
+            el: '#plugin2',
+            data: {
+                val : 1
+            },
+            methods : {
+                install : function(Vue, options){
+
+                }
+            }
+        });
+
+        plugin2.install = function(Vue, options){
+
+            // 1. add global method or property
+            Vue.myGlobalMethod = function () {
+                // something logic ...
+                console.log("plugin2 myGlobalMethod");
+            }
+            // 4. add an instance method
+            Vue.prototype.$myMethod = function (options) {
+                // something logic ...
+                console.log("plugin2 $myMethod");
+            }
+        };
+
+        Vue.use(plugin2);
+
+    });
 
 
 </script>
